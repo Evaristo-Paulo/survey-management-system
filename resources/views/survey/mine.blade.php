@@ -1,16 +1,26 @@
 @extends('template')
+@section('breadcrumb')
+<ul class="breadcrumb">
+    <li><a href="{{ route('survey.index') }}">Home </a><span class="iconify"
+            data-icon="akar-icons:chevron-right"></span></li>
+    <li><a href="javascript::void">Minhas enquetes </a></li>
+</ul>
+@endsection
 @section('content')
 <main>
-    <section class="wrapper" id="section-highlight-apt" data-aos="fade-up" data-aos-delay="200">
+    <section class="wrapper apartments n-default" id="section-highlight-apt">
         <div class="title">
             <h2>Minhas <span class='lost-highlight'>enquetes</span> </h2>
             <span class='underline'></span>
         </div>
+    </section>
+    <section class="wrapper" id="section-highlight-apt">
         <div class="group">
             @forelse($questions as $item)
                 <div class="item item-custom">
                     <div class="info-item">
                         <div class="enquete-body">
+
                             <p class="icon-question"><span class="iconify" data-icon="bi:patch-question-fill"
                                     style="color: #f8a300;"></span></p>
                             <p class="enquete-title">{{ $item->question }}</p>
@@ -25,7 +35,8 @@
                                 <a href="{{ route('survey.details', encrypt($item->id) ) }}"
                                     class="link text-view"><span class="iconify" data-icon="carbon:task-view"></span>
                                     Detalhes</a>
-                                <a href="{{ route('survey.edit.form', encrypt($item->id) ) }}" class="link text-warning"><span class="iconify text-dark"
+                                <a href="{{ route('survey.edit.form', encrypt($item->id) ) }}"
+                                    class="link text-warning"><span class="iconify text-dark"
                                         data-icon="akar-icons:edit"></span> Editar</a>
                                 <form action="{{ route('survey.delete') }}" method="POST">
                                     {{ csrf_field() }}
@@ -44,9 +55,10 @@
                     </div>
                 </div>
             @empty
-                Nenhuma enquete
+                Não há enquetes
             @endforelse
         </div>
     </section>
+
 </main>
 @endsection

@@ -1,3 +1,32 @@
+/* HANDLE ANIMATION BANNER  */
+var bannercarrossel = document.querySelectorAll('#banner-carrossel li');
+if (bannercarrossel.length > 0) {
+    var current = 1;
+    setInterval(function () {
+        for (let i = 0; i < bannercarrossel.length; i++) {
+            bannercarrossel[i].classList.remove('active-carrossel');
+        }
+        bannercarrossel[current].classList.add('active-carrossel');
+
+        current++
+        if (current >= bannercarrossel.length) {
+            current = 0;
+        }
+    }, 5000);
+}
+
+/* HANDLE VOTE OPTION */
+var radioInput = document.querySelectorAll('.radio input');
+if (radioInput) {
+    for (let i = 0; i < radioInput.length; i++) {
+        radioInput[i].addEventListener('change', (e) => {
+            var form = document.querySelector('#vote-form')
+            form.submit()
+        })
+    }
+}
+
+
 /* HANDLE PROGRESS BAR */
 const progressBarInners = document.querySelectorAll('#options .inner');
 if (progressBarInners) {
@@ -17,7 +46,6 @@ $(document).ready(function () {
             let div = $('<div class="form-group"></div>');
             div.append(input);
             $("#form-group-fieldset").append(div);
-            console.log(fieldsets)
         }
     });
 });
@@ -57,7 +85,6 @@ let anoucementSigninModal = document.querySelector('#anoucement-signin-modal');
 if (anoucementSigninButton) {
     for (let i = 0; i < anoucementSigninButton.length; i++) {
         anoucementSigninButton[i].addEventListener('click', (e) => {
-            console.log('Clicaste em mim')
             for (let ii = 0; ii < modalBody.length; ii++) {
                 modalBody[ii].style.display = 'none'
             }
@@ -88,7 +115,7 @@ if (anoucementSignupButton) {
 let liHighLight = document.querySelector('#create-anoucement .highlight');
 let authenticate = document.querySelector('#authenticate');
 
-if (liHighLight) {
+if (liHighLight && authenticate) {
     /* MOUSE OVER */
     liHighLight.addEventListener('mouseover', e => {
         authenticate.style.display = 'block'
@@ -97,7 +124,7 @@ if (liHighLight) {
     liHighLight.addEventListener('mouseout', e => {
         let liNavItemMain = document.querySelector('.nav-item-main');
         liNavItemMain.addEventListener('mouseover', e => {
-            if (authenticate.style.display == 'block')
+            if (authenticate && authenticate.style.display == 'block')
                 authenticate.style.display = 'none'
         })
     })
@@ -163,103 +190,6 @@ if (goUp) {
     goUp.addEventListener('click', () => {
         goTop();
     })
-}
-
-/* HANDLE MAIN PHOTO CHANGE BY CHOOSE ONE */
-const photos = document.querySelectorAll('.photo');
-let mainPhoto = document.querySelector('#main-photo');
-
-if (photos) {
-    for (let i = 0; i < photos.length; i++) {
-        photos[i].addEventListener('click', (e) => {
-            if (e.target.src != mainPhoto.src) {
-                mainPhoto.src = e.target.src;
-            }
-        })
-    }
-}
-
-/* HANDLE GETTING-IN-TOUCH FORM */
-let sendMessageButtom = document.querySelectorAll('.send-message');
-let scheduleButtom = document.querySelectorAll('.schedule');
-
-let sendMessageForm = document.querySelector('#send-message-form');
-let scheduleForm = document.querySelector('#schedule-form');
-
-if (sendMessageButtom && scheduleButtom) {
-    for (let i = 0; i < sendMessageButtom.length; i++) {
-        sendMessageButtom[i].addEventListener('click', (e) => {
-            if (sendMessageForm.style.display != 'block') {
-                sendMessageForm.style.display = 'block'
-                scheduleForm.style.display = 'none'
-            }
-        })
-    }
-
-    for (let i = 0; i < scheduleButtom.length; i++) {
-        scheduleButtom[i].addEventListener('click', (e) => {
-            if (scheduleForm.style.display != 'block') {
-                scheduleForm.style.display = 'block'
-                sendMessageForm.style.display = 'none'
-            }
-        })
-    }
-}
-
-/* HANDLE MAIN PHOTO CHANGE BY CHOOSE ONE */
-let moveLeft = document.querySelector('#left-movement');
-let moveRight = document.querySelector('#right-movement');
-
-if (moveRight && moveLeft) {
-    let count;
-    for (let i = 0; i < photos.length; i++) {
-        if (photos[i].children[0].src == mainPhoto.src) {
-            count = i;
-        }
-    }
-    moveRight.addEventListener('click', () => {
-        count++
-        if (count >= photos.length)
-            count = 0;
-        mainPhoto.src = photos[count].children[0].src;
-    })
-    moveLeft.addEventListener('click', () => {
-        count--
-        if (count < 0)
-            count = photos.length - 1
-        mainPhoto.src = photos[count].children[0].src;
-    })
-}
-
-/* HANDLE FILTER CONTENT */
-let filterPage = document.querySelectorAll('.filter-page');
-let btnFilterOption = document.querySelectorAll('.btnFilterOption');
-
-if (btnFilterOption) {
-    for (let i = 0; i < btnFilterOption.length; i++) {
-        btnFilterOption[i].children[1].style.display = 'none';
-        btnFilterOption[i].children[0].style.display = 'block';
-
-        btnFilterOption[i].addEventListener('click', (e) => {
-            if (document.querySelector(`#${e.target.dataset.value}`).style.display == 'block') {
-                document.querySelector(`#${e.target.dataset.value}`).style.display = 'none'
-                e.target.children[0].style.display = 'block' // show plus sign
-                e.target.children[1].style.display = 'none' // hiddn minus sign
-            } else {
-                for (let i = 0; i < btnFilterOption.length; i++) {
-                    btnFilterOption[i].children[1].style.display = 'none';
-                    btnFilterOption[i].children[0].style.display = 'block';
-                }
-
-                for (let ii = 0; ii < filterPage.length; ii++) {
-                    filterPage[ii].style.display = 'none';
-                }
-                document.querySelector(`#${e.target.dataset.value}`).style.display = 'block'
-                e.target.children[0].style.display = 'none' // Hidden plus sign
-                e.target.children[1].style.display = 'block' // show minus sign
-            }
-        })
-    }
 }
 
 

@@ -32,7 +32,7 @@ class UserController extends Controller
             ]);
 
             if ($validator->fails()) {
-                session()->flash('error', 'Ops! Verifique os dados e tenta novamente');
+                session()->flash('error', 'Verifique os campos e tenta novamente');
                 if (session('error')) {
                     Alert::toast(session('error'), 'error');
                 }

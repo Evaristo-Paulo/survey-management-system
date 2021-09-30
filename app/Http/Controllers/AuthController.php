@@ -48,7 +48,7 @@ class AuthController extends Controller
                     Alert::toast(session('success'), 'success');
                 }
 
-                return redirect()->back();
+                return redirect()->route('survey.mine');
             }
 
             session()->flash('warning', 'E-mail ou Senha não encontrada');
@@ -70,7 +70,6 @@ class AuthController extends Controller
             Alert::toast(session('warning'), 'warning');
         }
 
-        return "logout";
-        return redirect()->back();
+        return redirect()->route('survey.index');
     }
 }

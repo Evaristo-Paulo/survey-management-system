@@ -1,27 +1,34 @@
 @extends('template')
+@section('breadcrumb')
+<ul class="breadcrumb">
+    <li><a href="{{ route('survey.index') }}">Home </a><span class="iconify"
+            data-icon="akar-icons:chevron-right"></span></li>
+    <li><a href="javascript::void">Registo de enquetes </a></li>
+</ul>
+@endsection
 @section('content')
 <main>
-    <section class="wrapper single" id="section-highlight-apt" data-aos="fade-up" data-aos-delay="200">
+    <section class="wrapper apartments n-default" id="section-highlight-apt">
         <div class="title">
             <h2>Registo de <span class='lost-highlight'>enquetes</span> </h2>
             <span class='underline'></span>
             @if(session('url'))
-                <h2 class="url-title">Copiar link de compartilhamento</h2>
+                <h2 class="url-title">Copia este link e compartilha com quem quiseres</h2>
                 <input type="url" name="" class="url-generate" id="" value="{{ session('url') }}">
             @endif
         </div>
+    </section>
+    <section class="wrapper single" id="section-highlight-apt">
         <div class="getting-touch">
             <div class="form-contact">
                 <article id="schedule-form">
                     <h2></h2>
                     <form action="{{ route('survey.register.save') }}" method="POST">
                         {{ csrf_field() }}
-
                         <fieldset>
                             <legend>Pergunta</legend>
                             <div class="form-group">
-                                <textarea name="question" cols="2"
-                                    placeholder="Qual é a sua pergunta?">{{ old('question') }}</textarea>
+                                <textarea name="question" cols="2" placeholder="Qual é a tua pergunta?">{{ old('question') }}</textarea>
                             </div>
                         </fieldset>
                         <fieldset id="boxOptions">

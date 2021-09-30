@@ -11,7 +11,7 @@
     <link href="{{ url('survey/vendor/aos/aos.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('survey/style.css') }}">
     <link rel="stylesheet" href="{{ url('survey/enquete.css') }}">
-    <title>iask</title>
+    <title>iAsk</title>
 </head>
 
 <body>

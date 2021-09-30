@@ -15,6 +15,10 @@ class SurveyController extends Controller
 {
     public function index()
     {
+        return view('index');
+    }
+    public function my_surveis()
+    {
         $id = Auth::user()->id;
 
         $questions = DB::table('questions')
@@ -25,7 +29,7 @@ class SurveyController extends Controller
             ->select('questions.*')
             ->get();
 
-        return view('survey.index', compact('questions'));
+        return view('survey.mine', compact('questions'));
     }
     public function survey_details($id)
     {
@@ -40,13 +44,9 @@ class SurveyController extends Controller
             ->select('questions.*')
             ->first();
 
-        $options = DB::table('options')
-            ->join('questions', function ($join) use ($question_id) {
-                $join->on('options.question_id', '=', 'questions.id')
-                    ->where([['questions.id', '=', $question_id]]);
-            })
-            ->select('options.*')
-            ->get();
+        $function = new Option();
+
+        $options = $function->percentage($question, $user_id);
 
         return view('survey.details', compact('question', 'options'));
     }
@@ -94,6 +94,55 @@ class SurveyController extends Controller
         return view('survey.vote', compact('question', 'options'));
     }
 
+
+    public function vote_save(Request $request, $id)
+    {
+        try {
+
+            $validator = Validator::make($request->all(), [
+                "answers"    => "required|array|min:1|max:1",
+            ], [
+                'answers.array.' => 'Vote em uma das opções',
+                'answers.require.' => 'Vote em uma das opções',
+                'answers.*.require.' => 'Vote em uma das opções',
+                'answers.min' => 'Vote em uma das opções de cada vez',
+                'answers.max' => 'Vote em uma das opções de cada vez',
+            ]);
+
+            if ($validator->fails()) {
+                session()->flash('error', 'Verifique os campos e tenta novamente');
+                if (session('error')) {
+                    Alert::toast(session('error'), 'error');
+                }
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }
+
+            $id = decrypt($id);
+            $question = Question::find($id);
+            $options = $request->input('answers');
+            $option_id = $options[0];
+
+            $question->vote = $question->vote + 1;
+            $question->save();
+
+            $option = Option::find($option_id);
+            $option->vote = $option->vote + 1;
+            $option->save();
+
+            session()->flash('success', 'Voto contabilizado com sucesso');
+            if (session('success')) {
+                Alert::toast(session('success'), 'success');
+            }
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
     public function survey_update(Request $request, $id)
     {
         try {
@@ -119,7 +168,7 @@ class SurveyController extends Controller
             ]);
 
             if ($validator->fails()) {
-                session()->flash('error', 'Ops! Verifique os dados e tenta novamente');
+                session()->flash('error', 'Verifique os campos e tenta novamente');
                 if (session('error')) {
                     Alert::toast(session('error'), 'error');
                 }
@@ -161,8 +210,11 @@ class SurveyController extends Controller
 
             return redirect()->route('survey.details', encrypt($id));
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -184,7 +236,7 @@ class SurveyController extends Controller
             ]);
 
             if ($validator->fails()) {
-                session()->flash('error', 'Ops! Verifique os dados e tenta novamente');
+                session()->flash('error', 'Verifique os campos e tenta novamente');
                 if (session('error')) {
                     Alert::toast(session('error'), 'error');
                 }
@@ -212,7 +264,7 @@ class SurveyController extends Controller
             $question = Question::find($aux_question->id);
             $question->url = $url;
             $question->save();
-            
+
             session()->flash('url', $url);
             session()->flash('success', 'Pergunta registada com sucesso.');
             if (session('success')) {
@@ -221,8 +273,11 @@ class SurveyController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            dd($e->getMessage())
-;            //return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -238,9 +293,13 @@ class SurveyController extends Controller
                 Alert::toast(session('warning'), 'warning');
             }
 
-            return redirect()->route('survey.index');
+            return redirect()->route('survey.mine');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 
@@ -268,7 +327,11 @@ class SurveyController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 }
