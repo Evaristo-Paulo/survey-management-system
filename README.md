@@ -4,7 +4,8 @@
 
 ## Acesso rápido e credenciais
 
-- [link do projecto](https://iask-enquete.herokuapp.com)
+Projecto hospedado na heroku
+- [Acessa aqui](https://iask-enquete.herokuapp.com) para ser redirecionado a página do sistema
 
 O projecto já tem 2 usuários (Evaristo Paulo e John Doe), caso não queira criar novos.
 
