@@ -52,3 +52,5 @@ Este projecto foi hospedado utilizando um serviço de hospedagem grátis, heroku
 ## Nota importante
 
 Caso use o projecto localmente, não esquece de rodar o comando: php artisan migrate:fresh --seed para criar as tabelas da base de dados e gerar os usuários de teste, com as credencias acima referenciadas.
+
+Carrego fortes vivências com rotinas de programação, pois já desenvolvo projecto pessoais e igualmente participei em projectos colectivos, desenvolvendo projecto como criações de sistemas, sites, e-commerces, etç .. . E Nos últimos 2 anos trabalhei na empresa de consultoria Sustentare, ajudando a empresa atingir os seus objectivos trazendo soluções tecnológicas, portanto as minhas experiências vão agregar e ajudar a empresa atinguir os seus objectivos e agradar seus colaboradores, de forma mais eficiente e eficaz.

@@ -13,14 +13,7 @@ class Option extends Model
         
 
         $question_id = $question->id;
-        $options = DB::table('options')
-        ->join('questions', function ($join) use ($question_id) {
-            $join->on('options.question_id', '=', 'questions.id')
-                ->where([['questions.id', '=', $question_id]]);
-        })
-        ->select('options.*')
-        ->orderBy('options.id')
-        ->get();
+        $options = Option::where('question_id', $question_id)->orderBy('id')->get();
 
         $data = [];
 

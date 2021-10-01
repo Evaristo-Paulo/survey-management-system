@@ -21,7 +21,7 @@
                     <p class="icon-question"><span class="iconify" data-icon="gridicons:stats-up"
                             style="color: #f8a300;"></span></p>
                     <p class="enquete-title">{{ $question->question }}</p>
-                    <p class="enquete-vote">Copia link</p>
+                    <p class="enquete-vote">URL da pergunta</p>
                     <p><input type="url" name="" class="url-generate url-details" id=""
                             value="{{  $question->url }}"></p>
                     <p class="enquete-vote">{{ $question->vote }} Votos total</p>
@@ -51,6 +51,7 @@
                             </li>
                         @endforeach
                     </ul>
+                    @auth
                     <div class="icon-info">
                         <a href="{{ route('survey.edit.form', encrypt($question->id) ) }}"
                             class="link text-warning"><span class="iconify text-dark"
@@ -64,6 +65,7 @@
                                     data-icon="codicon:trash"></span> Excluir</button>
                         </form>
                     </div>
+                    @endauth
                 </div>
             </div>
         </div>

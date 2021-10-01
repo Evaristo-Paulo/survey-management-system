@@ -20,79 +20,46 @@ class SurveyController extends Controller
     public function my_surveis()
     {
         $id = Auth::user()->id;
-
-        $questions = DB::table('questions')
-            ->join('users', function ($join) use ($id) {
-                $join->on('questions.user_id', '=', 'users.id')
-                    ->where([['users.id', '=', $id]]);
-            })
-            ->select('questions.*')
-            ->orderBy('questions.id')
-            ->paginate(7);
+        $questions = Question::where('user_id', $id)->orderBy('id')->paginate(7);
 
         return view('survey.mine', compact('questions'));
     }
+
     public function survey_details($id)
     {
         $question_id = decrypt($id);
-        $user_id = Auth::user()->id;
+        $question = Question::find($question_id);
+        $user_id = $question->user_id;
 
-        $question = DB::table('questions')
-            ->join('users', function ($join) use ($user_id, $question_id) {
-                $join->on('questions.user_id', '=', 'users.id')
-                    ->where([['users.id', '=', $user_id], ['questions.id', '=', $question_id]]);
-            })
-            ->select('questions.*')
-            ->first();
-
+        $question = Question::where('id', $question_id)->where('user_id', $user_id)->first();
         $function = new Option();
-
         $options = $function->percentage($question, $user_id);
 
         return view('survey.details', compact('question', 'options'));
     }
+
     public function survey_edit_form($id)
     {
         $question_id = decrypt($id);
         $user_id = Auth::user()->id;
 
-        $question = DB::table('questions')
-            ->join('users', function ($join) use ($user_id, $question_id) {
-                $join->on('questions.user_id', '=', 'users.id')
-                    ->where([['users.id', '=', $user_id], ['questions.id', '=', $question_id]]);
-            })
-            ->select('questions.*')
-            ->first();
-
-        $options = DB::table('options')
-            ->join('questions', function ($join) use ($question_id) {
-                $join->on('options.question_id', '=', 'questions.id')
-                    ->where([['questions.id', '=', $question_id]]);
-            })
-            ->select('options.*')
-            ->orderBy('options.id')
-            ->get();
+        $question = Question::where('id', $question_id)->where('user_id', $user_id)->first();
+        $options = Option::where('question_id', $question_id)->orderBy('id')->get();
 
         return view('survey.edit', compact('question', 'options'));
     }
+
     public function survey_register_form()
     {
         return view('survey.register');
     }
+
     public function vote($id)
     {
         $id = decrypt($id);
 
         $question = Question::find($id);
-
-        $options = DB::table('options')
-            ->join('questions', function ($join) use ($id) {
-                $join->on('options.question_id', '=', 'questions.id')
-                    ->where([['questions.id', '=', $id]]);
-            })
-            ->select('options.*')
-            ->orderBy('options.id')
-            ->get();
+        $options = Option::where('question_id', $id)->orderBy('id')->get();
 
         return view('survey.vote', compact('question', 'options'));
     }
@@ -136,7 +103,7 @@ class SurveyController extends Controller
             if (session('success')) {
                 Alert::toast(session('success'), 'success');
             }
-            return redirect()->back();
+            return redirect()->route('survey.details', encrypt($id));
         } catch (\Exception $e) {
             session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
             if (session('error')) {
@@ -151,14 +118,7 @@ class SurveyController extends Controller
         try {
             $id = decrypt($id);
 
-            $options = DB::table('options')
-            ->join('questions', function ($join) use ($id) {
-                $join->on('options.question_id', '=', 'questions.id')
-                    ->where([['questions.id', '=', $id]]);
-            })
-            ->orderBy('options.id')
-            ->get();
-
+            $options = Option::where('question_id', $id)->orderBy('id')->get();
             //Quantas alternativas devem ser adicionadas
             $max = 10 - count($options);
 
@@ -316,7 +276,7 @@ class SurveyController extends Controller
     {
         try {
             $id = decrypt($id);
-            $option= Option::where('id', $id)->first();
+            $option = Option::where('id', $id)->first();
             $question = Question::find($option->question_id);
 
             $tams = Option::where('question_id', $question->id)->count();

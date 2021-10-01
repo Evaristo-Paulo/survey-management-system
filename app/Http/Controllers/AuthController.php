@@ -70,6 +70,6 @@ class AuthController extends Controller
             Alert::toast(session('warning'), 'warning');
         }
 
-        return redirect()->route('survey.index');
+        return redirect()->back();
     }
 }

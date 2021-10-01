@@ -26,7 +26,7 @@ Route::name('survey.')->group(function () {
     Route::get('/minhas-enquetes', 'SurveyController@my_surveis')->name('mine')->middleware('auth');
     Route::get('/enquetes/{id}/faca-a-sua-votacao/', 'SurveyController@vote')->name('vote.form');
     Route::post('/enquetes/{id}/faca-a-sua-votacao/', 'SurveyController@vote_save')->name('vote.save');
-    Route::get('/enquetes/{id}/detalhes', 'SurveyController@survey_details')->name('details')->middleware('auth');
+    Route::get('/enquetes/{id}/detalhes', 'SurveyController@survey_details')->name('details');
     Route::get('/enquetes/registo', 'SurveyController@survey_register_form')->name('register.form')->middleware('auth');
     Route::post('/enquetes/registo', 'SurveyController@survey_register_save')->name('register.save')->middleware('auth');
     Route::get('/enquetes/{id}/actualizacao', 'SurveyController@survey_edit_form')->name('edit.form')->middleware('auth');
