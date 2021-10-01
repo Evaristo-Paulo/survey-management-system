@@ -1,6 +1,6 @@
 ## Sistema de gerenciamento de enquetes
 
-iAsk é uma plataforma online para gerenciamento de enquetes, que visa extrair dados específicos de um determinado grupo de pessoas, em forma de perguntas e respostas diretas.
+[iAsk](https://iask-enquete.herokuapp.com) é uma plataforma online para gerenciamento de enquetes, que visa extrair dados específicos de um determinado grupo de pessoas, em forma de perguntas e respostas diretas.
 
 ## O que são enquetes
 
@@ -25,3 +25,15 @@ respostas;
 -   Após responder uma enquete, caso o usuário atualizar a página, poderá votar novamente e um novo
 voto será computado;
 -   Após responder a enquete, os resultados deverão ser mostrados ao usuário
+
+## Tecnologias utilizadas
+
+Este projecto foi desenvolvido utilizando o framework Laravel, pelas vantagens/produtividade durante o processo de desenvolvimento.
+
+- PHP/Laravel
+- HTML e Javascript
+- Postgres (Banco de dados)
+
+## Links
+
+Este projecto foi hospedado utilizando um serviço de hospedagem grátis, heroku. Acessa o link do projecto e me dá o seu feedback. [iAsk](https://iask-enquete.herokuapp.com).
