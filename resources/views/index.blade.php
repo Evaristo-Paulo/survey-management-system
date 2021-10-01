@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{{ url('survey/enquete.css') }}">
     <title>
         @auth
-            ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+            @if($global_questions->where('user_id', Auth::user()->id)->count() > 0 )
+                ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+            @endif
         @endauth
         iAsk
     </title>

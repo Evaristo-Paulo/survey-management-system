@@ -13,7 +13,7 @@
             <h2>Registo de <span class='lost-highlight'>enquetes</span> </h2>
             <span class='underline'></span>
             @if(session()->has('url') && session()->has('success'))
-                <h2 class="url-title">Copia este link e compartilha com quem quiseres</h2>
+                <h2 class="url-title">Copia o link da pergunta anterior e compartilha com quem quiseres</h2>
                 <input type="url" name="" class="url-generate" id="" value="{{ session('url') }}">
             @endif
         </div>

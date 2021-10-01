@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{{ url('survey/enquete.css') }}">
     <title>
         @auth
-            ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+            @if($global_questions->where('user_id', Auth::user()->id)->count() > 0 )
+                ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+            @endif
         @endauth
         iAsk
     </title>
@@ -30,7 +32,7 @@
     </div>
     <!-- MODAL -->
     @include('partials.modal')
-    
+
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ url('survey/vendor/jquery/jquery.min.js') }}"></script>

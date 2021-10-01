@@ -39,7 +39,7 @@
                         <div class="vote-info">
                             <a href="{{ route('survey.details', encrypt($question->id)) }}"
                                 class="link text-warning"><span class="iconify" data-icon="gridicons:stats-up"></span>
-                                Estatística da votação</a>
+                                Estatística de votação</a>
                         </div>
                     @endauth
                 </div>

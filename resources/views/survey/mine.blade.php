@@ -55,7 +55,7 @@
                     </div>
                 </div>
             @empty
-                Não há enquetes
+                <p style="font-size: 1.2rem; text-align: center">Não há enquetes registadas</p>
             @endforelse
         </div>
         {{ $questions->links() }}
