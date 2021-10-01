@@ -51,4 +51,4 @@ Este projecto foi hospedado utilizando um serviço de hospedagem grátis, heroku
 
 ## Nota importante
 
-Caso vai usar o projecto localmente, não esquece de rodar o comando: php artisan migrate:fresh --seed para criar as tabelas da base de dados e gerar os usuários de teste, com as credencias acima referenciadas.
+Caso use o projecto localmente, não esquece de rodar o comando: php artisan migrate:fresh --seed para criar as tabelas da base de dados e gerar os usuários de teste, com as credencias acima referenciadas.
