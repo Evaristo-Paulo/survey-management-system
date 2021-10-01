@@ -15,14 +15,14 @@ class AuthController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'email' => 'required|email',
-                    'password' => 'required|min:6',
+                    'emaillogin' => 'required|email',
+                    'passwordlogin' => 'required|min:6',
                 ],
                 [
-                    'email.required' => 'Campo E-mail é obrigatório',
-                    'email.email' => 'E-mail inválido',
-                    'password.required' => 'Campo Senha é obrigatório',
-                    'password.min' => 'Senha deve ter no mínimo 6 caracteres',
+                    'emaillogin.required' => 'Campo E-mail é obrigatório',
+                    'emaillogin.email' => 'E-mail inválido',
+                    'passwordlogin.required' => 'Campo Senha é obrigatório',
+                    'passwordlogin.min' => 'Senha deve ter no mínimo 6 caracteres',
                 ]
             );
 
@@ -34,12 +34,12 @@ class AuthController extends Controller
                 return redirect()->back()->withErrors($validator->errors())->withInput();
             }
             $credentials = [
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
+                'email' => $request->input('emaillogin'),
+                'password' => $request->input('passwordlogin')
             ];
 
             if (Auth::attempt($credentials)) {
-                Auth::logoutOtherDevices($request->input('password'));
+                Auth::logoutOtherDevices($request->input('passwordlogin'));
                 $user = auth()->user();
                 Auth::login($user);
 

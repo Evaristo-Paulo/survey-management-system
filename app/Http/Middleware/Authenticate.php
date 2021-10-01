@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -14,8 +15,12 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        if (!$request->expectsJson()) {
+            session()->flash('error', 'Faça o login');
+            if (session('error')) {
+                Alert::toast(session('error'), 'error');
+            }
+            return route('survey.index');
         }
     }
 }

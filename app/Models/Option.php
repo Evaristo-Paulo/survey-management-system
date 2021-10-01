@@ -19,6 +19,7 @@ class Option extends Model
                 ->where([['questions.id', '=', $question_id]]);
         })
         ->select('options.*')
+        ->orderBy('options.id')
         ->get();
 
         $data = [];

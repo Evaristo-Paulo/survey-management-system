@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Option;
+use App\Models\Question;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -28,7 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         if (!app()->runningInConsole() || app()->runningUnitTests()) {
             $options = Option::all();
-            View::share(compact('options'));
+            $global_questions = Question::all();
+            View::share(compact('options', 'global_questions'));
         }
     }
 }

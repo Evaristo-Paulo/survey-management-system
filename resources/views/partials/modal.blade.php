@@ -44,23 +44,21 @@
             <article>
                 <h2>Entrar na plataforma</h2>
                 <form action="{{ route('auth.login') }}" class="" method="POST">
-                    {{ csrf_field() }}
-
-                    <div class="form-group">
-                        <input type="email" name="email" value="{{ old('email') }}" required
+                    {{ csrf_field() }} <div class="form-group">
+                        <input type="email" name="emaillogin" value="{{ old('emaillogin') }}" required
                             placeholder="E-mail">
-                        @if($errors->has('email'))
-                            <span class="text-danger-error" style="font-size: .9rem">
-                                {{ $errors->first('email') }}
+                        @if($errors->has('emaillogin'))
+                            <span class="text-danger-error">
+                                {{ $errors->first('emaillogin') }}
                             </span>
                         @endif
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" value="{{ old('password') }}" required
-                            placeholder="Senha">
-                        @if($errors->has('password'))
-                            <span class="text-danger-error" style="font-size: .9rem">
-                                {{ $errors->first('password') }}
+                        <input type="password" name="passwordlogin" value="{{ old('passwordlogin') }}"
+                            required placeholder="Senha">
+                        @if($errors->has('passwordlogin'))
+                            <span class="text-danger-error">
+                                {{ $errors->first('passwordlogin') }}
                             </span>
                         @endif
                     </div>
@@ -115,6 +113,7 @@
                             </span>
                         @endif
                     </div>
+                    <a href="javascript:void" class="anoucement-signin-button">Já tem uma conta?</a>
                     <div class="btn-field">
                         <button type="submit">Criar</button>
                     </div>

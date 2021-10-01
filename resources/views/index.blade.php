@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,12 @@
     <link href="{{ url('survey/vendor/aos/aos.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('survey/style.css') }}">
     <link rel="stylesheet" href="{{ url('survey/enquete.css') }}">
-    <title>iAsk</title>
+    <title>
+        @auth
+            ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+        @endauth
+        iAsk
+    </title>
 </head>
 
 <body>
@@ -53,11 +58,11 @@
                                     <li><a href="javascript:void" class="anoucement-signin-button"
                                             style="display: flex; justify-content: flex-start; align-items: center;"><span
                                                 class="iconify" data-icon="clarity:login-line"
-                                                style="color: #A96262; margin-right: 5px;"></span>Entrar</a></li>
+                                                style="margin-right: 5px;"></span>Entrar</a></li>
                                     <li><a href="javascript:void" class="anoucement-signup-button"
                                             style="display: flex; justify-content: flex-start; align-items: center;"><span
                                                 class="iconify" data-icon="gridicons:create"
-                                                style="color: #A96262; margin-right: 5px"></span>Criar conta</a></li>
+                                                style=" margin-right: 5px"></span>Criar conta</a></li>
                                 </ul>
                             </li>
                         @endauth
@@ -77,7 +82,7 @@
             <section id="intro">
                 <article id="info" data-aos="fade-right" data-aos-delay="500">
                     <h2>Plataforma online para o gerenciamento de enquetes</h2>
-                    <p>Cria os teus enquetes de forma fácil e rápida, e compartilha com os seus amigos, colegas ou
+                    <p style="font-size: 1.2rem">Cria os teus enquetes de forma fácil e rápida, e compartilha com os seus amigos, colegas ou
                         colaboradores.</p>
                     @auth()
                         <a href="{{ route('survey.mine') }}" class="btn-link">Minhas enquetes</a>
@@ -198,10 +203,18 @@
         <main>
             <section class="wrapper" id="section-highlight-apt" data-aos="fade-up" data-aos-delay="200">
                 <div class="title">
-                    <h2>Minhas <span class='lost-highlight'>enquetes</span> </h2>
+                    <h2>O que são <span class='lost-highlight'>enquetes</span> </h2>
                     <span class='underline'></span>
                 </div>
-
+            </section>
+            <section class="wrapper" id="section-highlight-apt">
+                <div class="group">
+                    <p style="font-size: 1.2rem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident placeat pariatur nulla
+                        deserunt vel iusto fugiat hic quod repellendus asperiores sunt expedita sit blanditiis, nostrum
+                        animi ullam illum explicabo? Totam quod, illum eius repudiandae explicabo rerum! Ipsum fuga
+                        blanditiis quod placeat! Cumque corrupti officia accusamus earum, cum dolore temporibus
+                        voluptas.</p>
+                </div>
             </section>
         </main>
         @include('partials.footer')
@@ -254,20 +267,20 @@
                     <h2>Entrar na plataforma</h2>
                     <form action="{{ route('auth.login') }}" class="" method="POST">
                         {{ csrf_field() }} <div class="form-group">
-                            <input type="email" name="email" value="{{ old('email') }}" required
-                                placeholder="E-mail">
-                            @if($errors->has('email'))
+                            <input type="email" name="emaillogin" value="{{ old('emaillogin') }}"
+                                required placeholder="E-mail">
+                            @if($errors->has('emaillogin'))
                                 <span class="text-danger-error">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('emaillogin') }}
                                 </span>
                             @endif
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" value="{{ old('password') }}"
-                                required placeholder="Senha">
-                            @if($errors->has('password'))
+                            <input type="password" name="passwordlogin"
+                                value="{{ old('passwordlogin') }}" required placeholder="Senha">
+                            @if($errors->has('passwordlogin'))
                                 <span class="text-danger-error">
-                                    {{ $errors->first('password') }}
+                                    {{ $errors->first('passwordlogin') }}
                                 </span>
                             @endif
                         </div>
@@ -322,6 +335,7 @@
                                 </span>
                             @endif
                         </div>
+                        <a href="javascript:void" class="anoucement-signin-button">Já tem uma conta?</a>
                         <div class="btn-field">
                             <button>Criar</button>
                         </div>

@@ -34,7 +34,7 @@
                                             {{ $item['option'] }}
                                         </div>
                                         <div class="number-vote">
-                                            @if($item['vote'] == 0)
+                                            @if($item['vote'] == 0 || $item['vote'] == 1)
                                                 {{ $item['vote'] }} Voto
                                             @else
                                                 {{ $item['vote'] }} Votos

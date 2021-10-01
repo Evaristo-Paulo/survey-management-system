@@ -173,12 +173,6 @@ button {
     font-size: 1.2rem
 }
 
-.url-details {
-    border: 1px solid #8aaecf6b;
-    padding: 5px;
-    font-size: 1rem
-}
-
 .vote-info {
     width: 190px;
     margin: 15px auto;
@@ -219,15 +213,15 @@ button {
     height: 100% !important;
 }
 
-#banner-carrossel .banner-carrossel-body li{
+#banner-carrossel .banner-carrossel-body li {
     display: none;
     position: relative;
-    
+
     width: 100% !important;
     height: 100% !important;
 }
 
-#banner-carrossel .banner-carrossel-body li::after{
+#banner-carrossel .banner-carrossel-body li::after {
     content: '';
     display: block;
     position: absolute;
@@ -239,12 +233,12 @@ button {
 }
 
 
-#banner-carrossel{    
+#banner-carrossel {
     width: 100% !important;
     height: 100% !important;
 }
 
-#banner-carrossel .banner-carrossel-body li.active-carrossel{
+#banner-carrossel .banner-carrossel-body li.active-carrossel {
     display: block;
 }
 
@@ -252,6 +246,56 @@ button {
     width: 100% !important;
     height: 100% !important;
 }
+
+/* PAGINATE */
+.wrapper nav {
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end
+}
+
+.wrapper .page-item {
+    display: inline-block;
+    padding: 0;
+    padding: 10px 0;
+}
+
+.url-details {
+    border: 1px solid #8aaecf6b;
+    padding: 5px;
+    font-size: 1rem;
+    width: 95%;
+}
+
+fieldset {
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.602);
+}
+legend {
+    color: #5CB7AE;
+    padding: 0 10px
+}
+
+.wrapper .page-link {
+    border: 1px solid #5CB7AE;
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 1.2rem
+}
+
+.wrapper .page-item:hover {
+    color: #fff;
+    background-color: #5cb7ae46;
+}
+
+.wrapper .page-item.active {
+    color: #fff;
+    background-color: #5CB7AE
+}
+
 
 @media screen and (max-width: 337.5px) {
     .enquete-edit form {
@@ -269,5 +313,8 @@ button {
     .form-contact form {
         width: 500px !important;
         margin: 20px 0;
+    }
+    .url-details {
+        width: 50%;
     }
 }

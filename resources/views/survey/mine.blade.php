@@ -58,6 +58,7 @@
                 Não há enquetes
             @endforelse
         </div>
+        {{ $questions->links() }}
     </section>
 
 </main>

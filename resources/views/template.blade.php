@@ -11,7 +11,12 @@
     <link href="{{ url('survey/vendor/aos/aos.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('survey/style.css') }}">
     <link rel="stylesheet" href="{{ url('survey/enquete.css') }}">
-    <title>iAsk</title>
+    <title>
+        @auth
+            ({{ $global_questions->where('user_id', Auth::user()->id)->count() }})
+        @endauth
+        iAsk
+    </title>
 </head>
 
 <body>

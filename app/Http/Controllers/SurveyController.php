@@ -27,7 +27,8 @@ class SurveyController extends Controller
                     ->where([['users.id', '=', $id]]);
             })
             ->select('questions.*')
-            ->get();
+            ->orderBy('questions.id')
+            ->paginate(7);
 
         return view('survey.mine', compact('questions'));
     }
@@ -69,6 +70,7 @@ class SurveyController extends Controller
                     ->where([['questions.id', '=', $question_id]]);
             })
             ->select('options.*')
+            ->orderBy('options.id')
             ->get();
 
         return view('survey.edit', compact('question', 'options'));
@@ -89,6 +91,7 @@ class SurveyController extends Controller
                     ->where([['questions.id', '=', $id]]);
             })
             ->select('options.*')
+            ->orderBy('options.id')
             ->get();
 
         return view('survey.vote', compact('question', 'options'));
@@ -307,17 +310,21 @@ class SurveyController extends Controller
     {
         try {
             $id = decrypt($id);
-            $question_id = Option::where('id', $id)->first()->question_id;
+            $option= Option::where('id', $id)->first();
+            $question = Question::find($option->question_id);
 
-            $tams = Option::where('question_id', $question_id)->count();
+            $tams = Option::where('question_id', $question->id)->count();
 
             if ($tams > 2) {
-                DB::table('options')->where('id', $id)->where('question_id', $question_id)->delete();
+                $question->vote = $question->vote - $option->vote;
+                $question->save();
+
+                DB::table('options')->where('id', $id)->where('question_id', $question->id)->delete();
                 session()->flash('warning', 'Alternativa removida com sucesso');
                 if (session('warning')) {
                     Alert::toast(session('warning'), 'warning');
                 }
-                return redirect()->route('survey.details', encrypt($question_id));
+                return redirect()->route('survey.details', encrypt($question->id));
             }
 
             session()->flash('warning', 'Pergunta não pode ter menos de 2 alternativas');

@@ -1585,6 +1585,10 @@ img {
     }
     
 
+    .url-details {
+        width: 50%
+    }
+
     .title-social-media {
         display: block;
     }
@@ -1874,6 +1878,7 @@ img {
     header {
         height: 700px
     }
+    
 
     #banner {
         top: 0;
