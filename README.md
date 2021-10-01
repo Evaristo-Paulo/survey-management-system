@@ -2,6 +2,15 @@
 
 [iAsk](https://iask-enquete.herokuapp.com) é uma plataforma online para gerenciamento de enquetes, que visa extrair dados específicos de um determinado grupo de pessoas, em forma de perguntas e respostas diretas.
 
+## Acesso rápido e credenciais
+
+- [link do projecto](https://iask-enquete.herokuapp.com)
+
+O projecto já tem 2 usuários (Evaristo Paulo e John Doe), caso não queira criar novos.
+
+- Evaristo Paulo (E-mail: admin@gmail.com, senha: evaristo)
+- John Doe (E-mail: user@gmail.com, Senha: usuario)
+
 ## O que são enquetes
 
 Conjunto de depoimentos ou de pesquisas com o intuito de esclarecer uma questão, geralmente organizado por uma autoridade, por um jornal, por uma empresa privada ou por uma organização pública.
@@ -37,3 +46,8 @@ Este projecto foi desenvolvido utilizando o framework Laravel, pelas vantagens/p
 ## Links
 
 Este projecto foi hospedado utilizando um serviço de hospedagem grátis, heroku. Acessa o link do projecto e me dá o seu feedback. [iAsk](https://iask-enquete.herokuapp.com).
+
+
+## Nota importante
+
+Caso vai usar o projecto localmente, não esquece de rodar o comando: php artisan migrate:fresh --seed para criar as tabelas da base de dados e gerar os usuários de teste, com as credencias acima referenciadas.
