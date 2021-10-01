@@ -103,7 +103,7 @@ class SurveyController extends Controller
             if (session('success')) {
                 Alert::toast(session('success'), 'success');
             }
-            return redirect()->route('survey.details', encrypt($id));
+            return redirect()->back();
         } catch (\Exception $e) {
             session()->flash('error', 'ops! Ocorreu algum erro durante o processo');
             if (session('error')) {
