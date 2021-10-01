@@ -151,7 +151,14 @@ class SurveyController extends Controller
         try {
             $id = decrypt($id);
 
-            $options = Option::where('question_id', $id)->get();
+            $options = DB::table('options')
+            ->join('questions', function ($join) use ($id) {
+                $join->on('options.question_id', '=', 'questions.id')
+                    ->where([['questions.id', '=', $id]]);
+            })
+            ->orderBy('options.id')
+            ->get();
+
             //Quantas alternativas devem ser adicionadas
             $max = 10 - count($options);
 
@@ -187,7 +194,6 @@ class SurveyController extends Controller
                 ->update($question);
 
             $oldoptions = $request->input('oldoptions');
-
 
             foreach ($options as $index => $item) {
                 $option = Option::where('id', $item->id)->first();

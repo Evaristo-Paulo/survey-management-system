@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ secure_asset('survey/logo.png') }}" rel="icon">
+    <link href="{{ secure_asset('survey/logo.png') }}" rel="apple-touch-icon">
     <link href="{{ url('survey/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link href="{{ url('survey/vendor/owl.carousel/assets/owl.carousel.min.css') }}"
         rel="stylesheet">
@@ -211,11 +213,16 @@
             </section>
             <section class="wrapper" id="section-highlight-apt">
                 <div class="group">
-                    <p style="font-size: 1.2rem">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident placeat pariatur nulla
-                        deserunt vel iusto fugiat hic quod repellendus asperiores sunt expedita sit blanditiis, nostrum
-                        animi ullam illum explicabo? Totam quod, illum eius repudiandae explicabo rerum! Ipsum fuga
-                        blanditiis quod placeat! Cumque corrupti officia accusamus earum, cum dolore temporibus
-                        voluptas.</p>
+                    <div class="item">
+                        <p style="font-size: 1.2rem; padding: 20px; padding-bottom: 10px; text-align: justify">Conjunto de depoimentos ou de pesquisas com o intuito de esclarecer uma
+                            questão, geralmente organizado por uma autoridade, por um jornal, por uma empresa privada ou por
+                            uma organização pública.
+                        </p>
+                        <p style="font-size: 1.2rem; padding: 20px; padding-top: 0; text-align: justify">Com uma enquete, você consegue o resultado de imediato, pois ela é direta no seu objetivo e de
+                            carácter mais fechado, onde as opções de respostas já trazem uma proposta de solução do caso a
+                            ser analisado.
+                        </p>
+                    </div>
                 </div>
             </section>
         </main>

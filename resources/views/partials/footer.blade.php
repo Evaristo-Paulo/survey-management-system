@@ -7,7 +7,7 @@
             <p><span class="underline"></span></p>
             <p><span style="font-weight: 600; font-style: italic;">iAsk</span> é uma plataforma online para
                 gerenciamento de enquetes, que visa extrair dados
-                específicos de um determinado grupo de pessoas, em forma de perguntas direitas e respostas.</p>
+                específicos de um determinado grupo de pessoas, em forma de perguntas e respostas diretas.</p>
             <div class="contact">
                 <p>
                     <span class="iconify" data-icon="carbon:phone" style="color: white;"></span> <span
