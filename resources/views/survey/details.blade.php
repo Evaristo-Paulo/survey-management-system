@@ -68,8 +68,25 @@
                     @endauth
                 </div>
             </div>
+
+            <div class="graphic">
+                <div id="detail-graphic"></div>
+            </div>
+
+            <input type="hidden" id='data_graphic'  value="{{ $data }}">
+            <input type="hidden" id='question'  value="{{ $question->question }}">
         </div>
     </section>
 
 </main>
 @endsection
+
+@push('js')
+<script src="{{ url('graphic/highcharts.js') }}"></script>
+<script src="{{ url('graphic/highcharts-3d.js') }}"></script>
+<script src="{{ url('graphic/modules/series-label.js') }}"></script>
+<script src="{{ url('graphic/modules/exporting.js') }}"></script>
+<script src="{{ url('graphic/modules/export-data.js') }}"></script>
+<script src="{{ url('graphic/modules/cylinder.js') }}"></script>
+<script src="{{ url('graphic/all-graphic.js') }}"></script>
+@endpush

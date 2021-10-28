@@ -36,7 +36,6 @@
     </div>
     <!-- MODAL -->
     @include('partials.modal')
-
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ url('survey/vendor/jquery/jquery.min.js') }}"></script>
@@ -45,6 +44,7 @@
     <script src="{{ url('survey/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
     <script src="{{ url('survey/vendor/aos/aos.js') }}"></script>
     <script src="{{ url('survey/script.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

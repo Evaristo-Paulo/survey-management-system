@@ -33,9 +33,20 @@ class SurveyController extends Controller
 
         $question = Question::where('id', $question_id)->where('user_id', $user_id)->first();
         $function = new Option();
-        $options = $function->percentage($question, $user_id);
 
-        return view('survey.details', compact('question', 'options'));
+        $options = $function->percentage($question, $user_id);
+        $graphic = $function->show_vote_by_graphic($question, $user_id);
+        $data_question = $question->question;
+
+        return view('survey.details', compact('question', 'options'))
+            ->with(
+                'data_question',
+                json_encode($data_question, JSON_NUMERIC_CHECK)
+            )
+            ->with(
+                'data',
+                json_encode($graphic, JSON_NUMERIC_CHECK)
+            );;
     }
 
     public function survey_edit_form($id)
@@ -186,7 +197,6 @@ class SurveyController extends Controller
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
-
 
     public function survey_register_save(Request $request)
     {
