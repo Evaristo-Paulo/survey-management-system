@@ -58,7 +58,7 @@ class Option extends Model
             }
 
             $option = [
-                $i->option,
+                $i->option . '',
                 $i->vote
             ];
 

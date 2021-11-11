@@ -27,7 +27,7 @@
             <ul>
                 <li><a href="{{ route('survey.index') }}">Home</a></li>
                 @auth()
-                    <li><a href="javascript::void" class="anoucement-signin-button">Minhas enquetes</a></li>
+                    <li><a href="{{ route('survey.mine') }}">Minhas enquetes</a></li>
                     <li><a href="javascript::void" class="anoucement-signin-button">Registo de enquetes</a></li>
                 @else
                     <li><a href="javascript::void" class="anoucement-signin-button">Criar enquetes</a></li>

@@ -45,7 +45,6 @@
                                         <div class="bar">
                                             <div class="inner" data-vote="{{ $item['percentage'] }}"></div>
                                         </div>
-                                        <div class="number-vote">{{ $item['percentage'] }}%</div>
                                     </li>
                                 </ul>
                             </li>

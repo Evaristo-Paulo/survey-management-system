@@ -3,7 +3,13 @@ data = JSON.parse(data)
 
 var question = document.getElementById('question').value
 
-console.log(data.length)
+
+/* CONVERTER SEMPRE O 1º ELEMENTO DO VECTOR EM STRING */
+for (i = 0; i < data.length; i++){
+    data[i][0] = data[i][0] + ''
+}
+
+console.log(data)
 
 Highcharts.chart('detail-graphic', {
     chart: {
